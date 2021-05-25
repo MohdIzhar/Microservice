@@ -1,22 +1,6 @@
 version: "3"
 
 services:
-  ecomapp:
-    build:
-      dockerfile: Dockerfile
-      context: .
-    image: ecomimage:latest
-    container_name: ecomapp
-    command: bash -c "./superuser.sh"
-    depends_on:
-      - ecomappdb
-    ports:
-      - 8000:8000
-    volumes:
-      - ecomvol:/code
-    networks: 
-      - ecomnet
-    
   ecomappdb:
     image: mysql:latest
     container_name: ecomappdb
@@ -26,8 +10,26 @@ services:
       - 3306:3306
     env_file:
       - .env
-    networks: 
+    networks:
       - ecomnet
+
+  ecomapp:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    image: ecomimage:latest
+    container_name: ecomapp
+    command: bash -c "./superuser.sh"
+    links:
+      - "ecomappdb:ecomappdb"
+    depends_on:
+      - ecomappdb
+    ports:
+      - 8000:8000
+    volumes:
+      - ecomvol:/code
+    networks: 
+      - ecomnet 
 
 volumes:
   mysql_data:
