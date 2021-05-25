@@ -1,11 +1,14 @@
 #!/bin/bash
 
 echo "Checking migrations..."
-python3 manage.py makemigrations
+./manage.py makemigrations
+sleep 5
 echo "Applying migrations..."
-python3 manage.py migrate
+./manage.py migrate
+sleep 5
 echo "Creating superuser..."
 echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('izhar', 'izhar@gmail.com', 'izhar')" | python3 manage.py shell
 
+sleep 5
 echo "Starting server..."
-python3 manage.py runserver 0.0.0.0:8000
+./manage.py runserver 0.0.0.0:8000

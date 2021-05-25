@@ -7,7 +7,7 @@ services:
       context: .
     image: ecomimage:latest
     container_name: ecomapp
-    command: /bin/bash "superuser.sh"
+    command: bash -c "./superuser.sh"
     depends_on:
       - ecomappdb
     ports:
