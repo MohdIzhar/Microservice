@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+  loginappdb:
+    image: mysql:latest
+    container_name: loginappdb
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - 3306:3306
+    env_file:
+      - .env
+    networks:
+      - loginnet
+
+  loginapp:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    image: loginappimage:latest
+    container_name: loginapp
+    command: bash -c "./runserver.sh"
+    links:
+      - "loginappdb:loginappdb"
+    depends_on:
+      - loginappdb
+    ports:
+      - 8000:8000
+    volumes:
+      - loginvol:/code
+    networks: 
+      - loginnet 
+
+volumes:
+  mysql_data:
+  loginvol:
+networks: 
+  loginnet:
