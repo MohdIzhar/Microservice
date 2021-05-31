@@ -10,4 +10,3 @@ docker-compose up
 After running the command check the url http://ip:8000/ and for admin dashboard http://ip:8000/admin
 
 Default admin username - izhar and password - izhar
-
