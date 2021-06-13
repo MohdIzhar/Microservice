@@ -1,6 +1,19 @@
 version: "3"
 
 services:
+  loadbalancer:
+    build:
+      dockerfile: Dockerfile_nginx
+      context: .
+    image: ecomnginx:latest
+    container_name: loadbalancer
+    networks:
+      - ecomnet
+    ports:
+      - 80:80
+    depends_on:
+      - ecomapp
+
   ecomappdb:
     image: mysql:latest
     container_name: ecomappdb
