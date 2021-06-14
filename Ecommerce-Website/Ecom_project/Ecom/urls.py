@@ -20,4 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('products.urls')),
     path('ecom.com/', include('products.urls')),
+    path('login/', include('logincheck.urls')),
+    path('register/', include('logincheck.urls')),
 ]

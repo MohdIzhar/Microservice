@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+
+    <title>Login Page</title>
+  </head>
+
+  <body>
+    <nav
+      class="h1"
+      style="
+        text-align: center;
+        background-color: rgb(0, 0, 0);
+        color: white;
+        padding-top: 20px;
+        padding-bottom: 20px;
+      "
+    >
+      <span class="navbar-text">
+        <strong> User Login </strong>
+      </span>
+    </nav>
+
+    {% for message in messages %}
+
+    <div
+      class="alert alert-{{ message.tags }} alert-dismissible fade show"
+      role="alert"
+    >
+      <strong>Message: </strong> {{ message }}
+      <a href="{% url 'producturl' %}">Click here to go back to home Page</a>
+
+      <button
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %}
+    <form
+      class="container"
+      action="{% url 'loginurl' %}"
+      method="POST"
+      style="padding-top: 70px"
+    >
+      {% csrf_token %} {% for field in loginform %}
+
+      <div class="form-group">
+        {{ field.label }}
+        <input
+          type="{{ field.widget_type }}"
+          class="form-control"
+          id="{{ field.id_for_label }}"
+          name="{{ field.html_name }}"
+          placeholder="{{ field.label }}"
+          required
+        />
+      </div>
+      {% endfor %}
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </body>
+</html>
