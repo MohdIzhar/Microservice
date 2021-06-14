@@ -7,7 +7,7 @@ Note: Before running the command make sure docker-compose is installed and docke
 docker-compose up
 ```
 
-After running the command check the url http://ip:8000/ and for admin dashboard http://ip:8000/admin
+After running the command check the url http://localhost/ and for admin dashboard http://localhost/admin
 
 Default admin username - izhar and password - izhar
 Use the imageurls file for adding products and then refresh the ecom.com browser
